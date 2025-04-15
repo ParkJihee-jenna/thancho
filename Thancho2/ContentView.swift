@@ -12,11 +12,6 @@ struct ContentView: View {
         VStack {
 //            LottieView(fileName: "Thancho", loopMode: .loop)
             GitView(fileName: "Thancho")
-            
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Test")
         }
         .padding()
     }
