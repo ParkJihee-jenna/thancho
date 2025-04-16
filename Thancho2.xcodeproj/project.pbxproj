@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		3B4D3DC92DAE3BBA00E44C0F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3B4D3DC82DAE3BBA00E44C0F /* Lottie */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		3B4D3D372DACD1B200E44C0F /* Thancho2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thancho2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -40,7 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B4D3DC92DAE3BBA00E44C0F /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +78,6 @@
 			);
 			name = Thancho2;
 			packageProductDependencies = (
-				3B4D3DC82DAE3BBA00E44C0F /* Lottie */,
 			);
 			productName = Thancho2;
 			productReference = 3B4D3D372DACD1B200E44C0F /* Thancho2.app */;
@@ -114,8 +108,8 @@
 			mainGroup = 3B4D3D2E2DACD1B200E44C0F;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				3B4D3DC72DAE3BBA00E44C0F /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				3B4D3DD82DAE4DE300E44C0F /* XCRemoteSwiftPackageReference "WebKit" */,
+				3B66FABD2DAFCF1600BC77E2 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3B4D3D382DACD1B200E44C0F /* Products */;
@@ -349,14 +343,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3B4D3DC72DAE3BBA00E44C0F /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.5.1;
-			};
-		};
 		3B4D3DD82DAE4DE300E44C0F /* XCRemoteSwiftPackageReference "WebKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WebKit/WebKit.git";
@@ -365,15 +351,15 @@
 				kind = branch;
 			};
 		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3B4D3DC82DAE3BBA00E44C0F /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3B4D3DC72DAE3BBA00E44C0F /* XCRemoteSwiftPackageReference "lottie-spm" */;
-			productName = Lottie;
+		3B66FABD2DAFCF1600BC77E2 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
 		};
-/* End XCSwiftPackageProductDependency section */
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 3B4D3D2F2DACD1B200E44C0F /* Project object */;
 }

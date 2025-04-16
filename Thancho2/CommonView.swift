@@ -3,7 +3,10 @@
 ////
 ////  Created by 박지희 on 4/15/25.
 
+//MARK: - New Code
+
 import SwiftUI
+import PhotosUI
 
 enum ModeType: String {
     case writing = "Writing"
@@ -11,13 +14,17 @@ enum ModeType: String {
 }
 
 struct JournalEntryView: View {
-    
     @State private var mode: ModeType = .writing
     @State private var currentDate: Date = Date()
     @State private var entryText: String = ""
     @State private var showCalendar: Bool = false
     @State private var showMenu: Bool = false
     @State private var showDeleteAlert: Bool = false
+    
+    @State private var selectedImages: [UIImage] = []
+    @State private var showImageViewer: Bool = false
+    @State private var selectedImageForViewer: UIImage? = nil
+    @State private var imageSelections: [PhotosPickerItem] = []
 
     var formattedDate: String {
         let formatter = DateFormatter()
@@ -25,6 +32,7 @@ struct JournalEntryView: View {
         formatter.locale = Locale(identifier: "ko_KR")
         return formatter.string(from: currentDate)
     }
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -67,7 +75,7 @@ struct JournalEntryView: View {
                 .padding(.top, 12)
 
                 // 날짜 + 캘린더 버튼
-                VStack(alignment: .center, spacing: 4) {
+                VStack(spacing: 4) {
                     Button(action: {
                         withAnimation {
                             showCalendar.toggle()
@@ -77,7 +85,6 @@ struct JournalEntryView: View {
                             Image("Calendar")
                                 .resizable()
                                 .frame(width: 22, height: 22)
-                                .foregroundColor(Color(red: 0.33, green: 0.39, blue: 0.42))
                                 .padding(.top, 10)
                             Text(formattedDate)
                                 .font(.custom("NanumYuniDdingDdangDdingDdang", size: 32))
@@ -87,23 +94,97 @@ struct JournalEntryView: View {
                 }
                 .padding(.top, 16)
 
-                // 글쓰기 배경
+                // 글쓰기 + 이미지 표시
                 ZStack(alignment: .topLeading) {
-                    TextEditor(text: $entryText)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .scrollContentBackground(.hidden)
-                        .font(.custom("NanumYuniDdingDdangDdingDdang", size: 24))
-                        .background(Color(red: 0.5, green: 0.69, blue: 0.84).opacity(0.2), in: RoundedRectangle(cornerRadius: 20))
-                        .disabled(mode == .saving)
+                    VStack(spacing: 0) {
+                        TextEditor(text: $entryText)
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
+                            .padding(.bottom, selectedImages.isEmpty ? 20 : 0)
+                            .scrollContentBackground(.hidden)
+                            .font(.custom("NanumYuniDdingDdangDdingDdang", size: 24))
+                            .background(Color.clear)
+                            .frame(maxHeight: .infinity)
+                            .disabled(mode == .saving)
+                        
+
+                        if !selectedImages.isEmpty {
+                            HStack(spacing: 8) {
+                                ForEach(Array(selectedImages.prefix(3).enumerated()), id: \.offset) { index, image in
+                                    ZStack(alignment: .topTrailing) {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .clipped()
+                                            .cornerRadius(10)
+                                            .onTapGesture {
+                                                if mode == .saving {
+                                                    selectedImageForViewer = image
+                                                    showImageViewer = true
+                                                }
+                                            }
+                                        
+                                        VStack {
+                                            
+                                        }
+                                        .frame(width: 60, height: 60)
+                                        .background(Color.black.opacity(0.2), in: RoundedRectangle(cornerRadius: 10))
+
+                                        if mode == .writing {
+                                            Button(action: {
+                                                selectedImages.remove(at: index)
+                                            }) {
+                                                Image("Cancel")
+                                                    .resizable()
+                                                    .frame(width: 16, height: 16)
+                                            }
+                                            .padding(4)
+                                        }
+                                    }
+                                }
+
+                                if selectedImages.count > 4 {
+                                    let remaining = selectedImages.count - 4
+                                    ZStack {
+                                        Image(uiImage: selectedImages[4])
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .clipped()
+                                            .cornerRadius(10)
+                                            .onTapGesture {
+                                                if mode == .saving {
+                                                    selectedImageForViewer = selectedImages[4]
+                                                    showImageViewer = true
+                                                }
+                                            }
+
+                                        Rectangle()
+                                            .foregroundColor(Color.black.opacity(0.5))
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(10)
+
+                                        Text("+\(remaining)")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 14, weight: .bold))
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 18)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color(red: 0.5, green: 0.69, blue: 0.84).opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
 
                     if entryText.isEmpty {
                         Text("마음에 울린 감사의 메아리를 적어보아요")
-                            .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 27))
+                            .font(.custom("NanumYuniDdingDdangDdingDdang", size: 27))
                             .foregroundColor(Color(red: 0.33, green: 0.39, blue: 0.42))
-                            .padding(.horizontal, 20)
-                            .padding(.top, 20)
-                            .lineLimit(1)
+                            .padding(.horizontal, 28)
+                            .padding(.top, 28)
                     }
                 }
                 .padding(.top, 20)
@@ -112,16 +193,32 @@ struct JournalEntryView: View {
                 // 하단 버튼
                 if mode == .writing {
                     HStack(spacing: 9) {
-                        Button(action: {}) {
+                        Button(action: {
+                            // 카메라
+                        }) {
                             Image("Camera")
                                 .resizable()
                                 .frame(width: 30, height: 30)
                         }
 
-                        Button(action: {}) {
+                        PhotosPicker(
+                            selection: $imageSelections,
+                            maxSelectionCount: 10,
+                            matching: .images
+                        ) {
                             Image("Media")
                                 .resizable()
                                 .frame(width: 30, height: 30)
+                        }
+                        .onChange(of: imageSelections) { newItems in
+                            for item in newItems {
+                                Task {
+                                    if let data = try? await item.loadTransferable(type: Data.self),
+                                       let uiImage = UIImage(data: data) {
+                                        selectedImages.append(uiImage)
+                                    }
+                                }
+                            }
                         }
 
                         Spacer()
@@ -134,7 +231,7 @@ struct JournalEntryView: View {
             }
             .padding(.horizontal, 24)
 
-            // 캘린더 팝업
+            // 캘린더
             if showCalendar {
                 ZStack {
                     Color.black.opacity(0.4)
@@ -143,9 +240,8 @@ struct JournalEntryView: View {
                             withAnimation {
                                 showCalendar = false
                             }
-                            
                         }
-                    
+
                     VStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.white)
@@ -160,52 +256,46 @@ struct JournalEntryView: View {
                                 .datePickerStyle(.graphical)
                                 .labelsHidden()
                                 .padding()
+                                .tint(Color(red: 0.5, green: 0.69, blue: 0.84))
                             )
                     }
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
-            // 드롭다운 메뉴
+            // 메뉴
             if showMenu {
                 VStack {
                     HStack {
                         Spacer()
 
                         VStack(spacing: 0) {
-                            Button(action: {
+                            Button("수정하기") {
                                 mode = .writing
                                 withAnimation {
                                     showMenu = false
                                 }
-                            }) {
-                                Text("수정하기")
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .foregroundColor(.black)
                             }
+                            .padding()
+                            .foregroundColor(.black)
 
                             Divider()
 
-                            Button(action: {
+                            Button("삭제하기") {
                                 withAnimation {
                                     showMenu = false
                                 }
                                 showDeleteAlert = true
-                            }) {
-                                Text("삭제하기")
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .foregroundColor(.red)
                             }
+                            .padding()
+                            .foregroundColor(.red)
                         }
                         .background(Color.white)
                         .cornerRadius(10)
                         .shadow(radius: 5)
                         .frame(width: 120)
                         .padding(.trailing, 12)
-                        .padding(.top, 70)
-                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .padding(.top, 44)
                     }
 
                     Spacer()
@@ -218,16 +308,40 @@ struct JournalEntryView: View {
                 }
             }
         }
-        // 삭제 알림창
-        .alert("정말 삭제할까요?", isPresented: $showDeleteAlert) {
+        .onChange(of: currentDate) { _ in
+            withAnimation {
+                showCalendar = false
+            }
+        }
+        .alert("정말 삭제시겠습니까?", isPresented: $showDeleteAlert) {
             Button("Delete", role: .destructive) {
-                // 삭제 로직
-                print("삭제됨")
                 entryText = ""
+                selectedImages = []
                 mode = .writing
             }
-            Button("Cancel", role: .cancel) {
-                // 취소
+            Button("Cancel", role: .cancel) {}
+        }
+
+        .sheet(isPresented: $showImageViewer) {
+            if let selected = selectedImageForViewer {
+                ZStack(alignment: .topTrailing) {
+                    Color.black.ignoresSafeArea()
+                    Image(uiImage: selected)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+                    Button(action: {
+                        showImageViewer = false
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.white)
+                            .font(.largeTitle)
+                            .padding()
+                    }
+                }
+            } else {
+                Text("image viewer")
             }
         }
     }
@@ -236,3 +350,5 @@ struct JournalEntryView: View {
 #Preview {
     JournalEntryView()
 }
+
+
