@@ -10,8 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-//            LottieView(fileName: "Thancho", loopMode: .loop)
-            GitView(fileName: "Thancho")
+            LottieView(fileName: "Thancho", loopMode: .playOnce)
         }
         .padding()
     }
