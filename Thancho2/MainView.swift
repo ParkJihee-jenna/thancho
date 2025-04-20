@@ -3,6 +3,7 @@
 //  Thancho2
 //
 //  Created by 박지희 on 4/18/25.
+
 import SwiftUI
 
 struct MainView: View {
@@ -38,6 +39,7 @@ struct MainView: View {
                 .position(x: 252, y: 535.8)
             }
         }
+        .navigationBarBackButtonHidden(true) // 뒤로가기 버튼 숨기기
     }
 }
 

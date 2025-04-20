@@ -10,14 +10,14 @@ struct SplashScreenView: View {
     @State private var isActive = false
 
     var body: some View {
-        NavigationStack { // ✅ 여기서 감싸주면 된다!
+        NavigationStack { 
             ZStack {
                 if isActive {
-                    MainView() // 이건 내부에 NavigationView 없어야 함!
+                    MainView() 
                 } else {
                     ContentView()
                         .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
                                 withAnimation {
                                     isActive = true
                                 }

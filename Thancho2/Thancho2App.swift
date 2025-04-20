@@ -5,6 +5,7 @@
 //  Created by 박지희 on 4/14/25.
 //
 import SwiftUI
+import SwiftData
 
 @main
 struct Thancho2App: App {
@@ -12,5 +13,6 @@ struct Thancho2App: App {
         WindowGroup {
             SplashScreenView()
         }
+        .modelContainer(for: [Journal.self]) // ✅ SwiftData 연결
     }
 }

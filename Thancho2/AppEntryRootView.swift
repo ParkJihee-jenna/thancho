@@ -10,7 +10,7 @@ import SwiftUI
 struct AppEntryRootView: View {
     var body: some View {
         NavigationStack {
-            SplashScreenView() // 로티 애니 끝나면 MainView로 전환
+            SplashScreenView()
         }
     }
 }
