@@ -18,4 +18,8 @@ class Journal {
         self.content = content
         self.imageDataArray = imageDataArray
     }
+
+    static var sample: Journal {
+        Journal(date: Date(), content: "", imageDataArray: [])
+    }
 }

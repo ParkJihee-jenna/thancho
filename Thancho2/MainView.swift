@@ -3,7 +3,6 @@
 //  Thancho2
 //
 //  Created by 박지희 on 4/18/25.
-
 import SwiftUI
 
 struct MainView: View {
@@ -19,7 +18,8 @@ struct MainView: View {
                     .ignoresSafeArea()
 
                 // Thancho 쓰기 버튼
-                NavigationLink(destination: JournalEntryView().navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: JournalEntryView()
+                    .navigationBarBackButtonHidden(true)) {
                     Text("Thancho 쓰기")
                         .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 34))
                         .foregroundColor(.black)
@@ -29,7 +29,8 @@ struct MainView: View {
                 .position(x: 252, y: 271.8)
 
                 // Thancho 모아보기 버튼
-                NavigationLink(destination: JournalCardExampleView().navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: JournalCardExampleView()
+                    .navigationBarBackButtonHidden(true)) {
                     Text("Thancho 모아보기")
                         .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 34))
                         .foregroundColor(Color(hex: "#FAFAFA"))
