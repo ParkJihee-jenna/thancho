@@ -1,8 +1,7 @@
-////////  WritingView.swift
-////////  Thancho2
-////////
-////////  Created by 박지희 on 4/15/25.
-
+//////////  JournalEntryView.swift
+//////////  Thancho2
+//////////
+//////////  Created by 박지희 on 4/15/25.
 import SwiftUI
 import PhotosUI
 import SwiftData
@@ -31,8 +30,12 @@ struct JournalEntryView: View {
     @State private var imageSelections: [PhotosPickerItem] = []
 
     @State private var dateButtonFrame: CGRect = .zero
+    @FocusState private var isTextEditorFocused: Bool
+
+    var editingJournal: Journal?
 
     init(journal: Journal? = nil, forceWritingMode: Bool = false) {
+        self.editingJournal = journal
         if let journal = journal {
             _mode = State(initialValue: forceWritingMode ? .writing : .saving)
             _currentDate = State(initialValue: journal.date)
@@ -51,6 +54,12 @@ struct JournalEntryView: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .topLeading) {
+                Color.white.opacity(0.001) // invisible background for tap gesture
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isTextEditorFocused = false
+                    }
+
                 VStack(spacing: 0) {
                     topBar
                     dateSelector
@@ -67,9 +76,14 @@ struct JournalEntryView: View {
             }
             .alert("정말 삭제하시겠습니까?", isPresented: $showDeleteAlert) {
                 Button("Delete", role: .destructive) {
+                    if let journal = editingJournal {
+                        modelContext.delete(journal)
+                        try? modelContext.save()
+                    }
                     entryText = ""
                     selectedImages = []
                     mode = .writing
+                    navigateToMain = true
                 }
                 Button("Cancel", role: .cancel) {}
             }
@@ -130,14 +144,18 @@ struct JournalEntryView: View {
 
     private var dateSelector: some View {
         VStack(spacing: 4) {
-            Button(action: { withAnimation { showCalendar.toggle() } }) {
+            Button(action: {
+                if mode == .writing {
+                    withAnimation { showCalendar.toggle() }
+                }
+            }) {
                 HStack(spacing: 6) {
                     Image("Calendar")
                         .resizable()
                         .frame(width: 22, height: 22)
                         .padding(.top, 8)
                     Text(formattedDate)
-                        .font(.custom("NanumYuniDdingDdangDdingDdang", size: 32))
+                        .font(.custom("NanumYuniDdingDdangDdingDdang", size: 28))
                         .foregroundColor(.black)
                 }
             }
@@ -163,6 +181,7 @@ struct JournalEntryView: View {
                     .font(.custom("NanumYuniDdingDdangDdingDdang", size: 24))
                     .background(Color.clear)
                     .frame(maxHeight: .infinity)
+                    .focused($isTextEditorFocused)
                     .disabled(mode == .saving)
 
                 if !selectedImages.isEmpty {
@@ -223,7 +242,7 @@ struct JournalEntryView: View {
 
             if entryText.isEmpty {
                 Text("마음에 울린 감사의 메아리를 적어보아요")
-                    .font(.custom("NanumYuniDdingDdangDdingDdang", size: 27))
+                    .font(.custom("NanumYuniDdingDdangDdingDdang", size: 24))
                     .foregroundColor(.gray)
                     .padding(.horizontal, 28)
                     .padding(.top, 28)
@@ -328,12 +347,21 @@ struct JournalEntryView: View {
 
     private func saveOrToggleMenu() {
         if mode == .writing {
-            mode = .saving
-            let imageDatas = selectedImages.compactMap { $0.jpegData(compressionQuality: 0.8) }
-            let newJournal = Journal(date: currentDate, content: entryText, imageDataArray: imageDatas)
-            modelContext.insert(newJournal)
+            if let journal = editingJournal {
+                journal.date = currentDate
+                journal.content = entryText
+                journal.imageDataArray = selectedImages.compactMap { $0.jpegData(compressionQuality: 0.8) }
+            } else {
+                let newJournal = Journal(
+                    date: currentDate,
+                    content: entryText,
+                    imageDataArray: selectedImages.compactMap { $0.jpegData(compressionQuality: 0.8) }
+                )
+                modelContext.insert(newJournal)
+            }
             do {
                 try modelContext.save()
+                mode = .saving
                 showSavedAlert = true
             } catch {
                 print("❌ Save failed: \(error.localizedDescription)")
@@ -342,8 +370,4 @@ struct JournalEntryView: View {
             withAnimation { showMenu.toggle() }
         }
     }
-}
-
-#Preview {
-    JournalEntryView()
 }

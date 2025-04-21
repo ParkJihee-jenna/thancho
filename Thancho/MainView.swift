@@ -11,40 +11,42 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // 전체 배경 이미지
                 Image("MainView")
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
 
                 // Thancho 쓰기 버튼
-                NavigationLink(destination: JournalEntryView()
-                    .navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: {
+                    JournalEntryView()
+                        .navigationBarBackButtonHidden(true)
+                }) {
                     Text("Thancho 쓰기")
-                        .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 34))
+                        .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 30))
                         .foregroundColor(.black)
                         .frame(width: buttonFrameWidth, alignment: .trailing)
-                        .rotationEffect(.degrees(-21.5))
+                        .rotationEffect(.degrees(-19.76))
                 }
                 .position(x: 252, y: 271.8)
 
                 // Thancho 모아보기 버튼
-                NavigationLink(destination: JournalCardExampleView()
-                    .navigationBarBackButtonHidden(true)) {
+                NavigationLink(destination: {
+                    JournalCardExampleView()
+                        .navigationBarBackButtonHidden(true)
+                }) {
                     Text("Thancho 모아보기")
-                        .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 34))
+                        .font(Font.custom("Nanum YuNiDdingDdangDdingDdang", size: 30))
                         .foregroundColor(Color(hex: "#FAFAFA"))
                         .frame(width: buttonFrameWidth, alignment: .trailing)
-                        .rotationEffect(.degrees(22.14))
+                        .rotationEffect(.degrees(21.97))
                 }
-                .position(x: 252, y: 535.8)
+                .position(x: 252, y: 528.8)
             }
         }
-        .navigationBarBackButtonHidden(true) // 뒤로가기 버튼 숨기기
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-// HEX Color Extension
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -68,6 +70,6 @@ extension Color {
     }
 }
 
-#Preview {
-    MainView()
-}
+//#Preview {
+//    MainView()
+//}

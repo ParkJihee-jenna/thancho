@@ -11,26 +11,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B4D3D372DACD1B200E44C0F /* Thancho2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thancho2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4D3D372DACD1B200E44C0F /* Thancho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thancho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3B4D3DC62DAE335500E44C0F /* Exceptions for "Thancho2" folder in "Thancho2" target */ = {
+		3B4D3DC62DAE335500E44C0F /* Exceptions for "Thancho" folder in "Thancho" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 3B4D3D362DACD1B200E44C0F /* Thancho2 */;
+			target = 3B4D3D362DACD1B200E44C0F /* Thancho */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3B4D3D392DACD1B200E44C0F /* Thancho2 */ = {
+		3B4D3D392DACD1B200E44C0F /* Thancho */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				3B4D3DC62DAE335500E44C0F /* Exceptions for "Thancho2" folder in "Thancho2" target */,
+				3B4D3DC62DAE335500E44C0F /* Exceptions for "Thancho" folder in "Thancho" target */,
 			);
-			path = Thancho2;
+			path = Thancho;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -50,7 +50,7 @@
 		3B4D3D2E2DACD1B200E44C0F = {
 			isa = PBXGroup;
 			children = (
-				3B4D3D392DACD1B200E44C0F /* Thancho2 */,
+				3B4D3D392DACD1B200E44C0F /* Thancho */,
 				3B4D3D382DACD1B200E44C0F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,7 +58,7 @@
 		3B4D3D382DACD1B200E44C0F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B4D3D372DACD1B200E44C0F /* Thancho2.app */,
+				3B4D3D372DACD1B200E44C0F /* Thancho.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,9 +66,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3B4D3D362DACD1B200E44C0F /* Thancho2 */ = {
+		3B4D3D362DACD1B200E44C0F /* Thancho */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B4D3D452DACD1B300E44C0F /* Build configuration list for PBXNativeTarget "Thancho2" */;
+			buildConfigurationList = 3B4D3D452DACD1B300E44C0F /* Build configuration list for PBXNativeTarget "Thancho" */;
 			buildPhases = (
 				3B4D3D332DACD1B200E44C0F /* Sources */,
 				3B4D3D342DACD1B200E44C0F /* Frameworks */,
@@ -79,14 +79,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				3B4D3D392DACD1B200E44C0F /* Thancho2 */,
+				3B4D3D392DACD1B200E44C0F /* Thancho */,
 			);
-			name = Thancho2;
+			name = Thancho;
 			packageProductDependencies = (
 				3B500E842DB0D8BE0048386C /* Lottie */,
 			);
 			productName = Thancho2;
-			productReference = 3B4D3D372DACD1B200E44C0F /* Thancho2.app */;
+			productReference = 3B4D3D372DACD1B200E44C0F /* Thancho.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3B4D3D322DACD1B200E44C0F /* Build configuration list for PBXProject "Thancho2" */;
+			buildConfigurationList = 3B4D3D322DACD1B200E44C0F /* Build configuration list for PBXProject "Thancho" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -121,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3B4D3D362DACD1B200E44C0F /* Thancho2 */,
+				3B4D3D362DACD1B200E44C0F /* Thancho */,
 			);
 		};
 /* End PBXProject section */
@@ -273,10 +273,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Thancho2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Thancho/Preview Content\"";
+				DEVELOPMENT_TEAM = H8KJU77VJK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Thancho2/Info.plist;
+				INFOPLIST_FILE = Thancho/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -302,10 +303,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Thancho2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Thancho/Preview Content\"";
+				DEVELOPMENT_TEAM = H8KJU77VJK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Thancho2/Info.plist;
+				INFOPLIST_FILE = Thancho/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -327,7 +329,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3B4D3D322DACD1B200E44C0F /* Build configuration list for PBXProject "Thancho2" */ = {
+		3B4D3D322DACD1B200E44C0F /* Build configuration list for PBXProject "Thancho" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B4D3D432DACD1B300E44C0F /* Debug */,
@@ -336,7 +338,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3B4D3D452DACD1B300E44C0F /* Build configuration list for PBXNativeTarget "Thancho2" */ = {
+		3B4D3D452DACD1B300E44C0F /* Build configuration list for PBXNativeTarget "Thancho" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B4D3D462DACD1B300E44C0F /* Debug */,

@@ -1,9 +1,9 @@
-//
-//  Journal.swift
-//  Thancho2
-//
-//  Created by 박지희 on 4/20/25.
-//
+////
+////  Journal.swift
+////  Thancho2
+////
+////  Created by 박지희 on 4/20/25.
+////
 import Foundation
 import SwiftData
 
