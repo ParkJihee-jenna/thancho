@@ -50,7 +50,6 @@ struct JournalEntryView: View {
     
     // 새 알림 상태 추가
     @State private var showEmptyTextAlert: Bool = false
-
     
     // 텍스트 에디터 포커스 상태 관리
     @FocusState private var isTextEditorFocused: Bool
@@ -133,7 +132,7 @@ struct JournalEntryView: View {
                 TabView(selection: $selectedImageIndex) {
                     ForEach(selectedImages.indices, id: \.self) { i in
                         ZStack(alignment: .topTrailing) {
-                            Color.black.ignoresSafeArea()       // 전체 배경을 검정색으로 설정
+                            Color.white.ignoresSafeArea()       // 전체 배경을 흰색으로 설정
                             Image(uiImage: selectedImages[i])   // 해당 인덱스의 이미지 표시
                                 .resizable()
                                 .scaledToFit()                  // 이미지 크기 비율 유지하며 맞춤
@@ -186,15 +185,17 @@ struct JournalEntryView: View {
             Button(action: { dismiss() }) { // 뒤로가기 버튼
                 Image(systemName: "chevron.left") // 왼쪽 화살표 이미지
                     .font(.title2) // 아이콘 크기
-                    .foregroundColor(.gray) // 회색 아이콘
+                    .foregroundColor(.black) // 검정색 아이콘
                     .padding(.top, 10) // 위 여백
                     .padding(.leading, 12) // 왼쪽 여백
             }
             Spacer() // 가운데 공간 확보 (오른쪽 버튼을 끝으로 밀기 위함)
-            Button(action: saveOrToggleMenu) { // 저장 or 메뉴 버튼
-                Image(systemName: mode == .writing ? "checkmark" : "ellipsis") // 작성 중이면 체크, 아니면 점 3개
+            Button(action: saveOrToggleMenu) {
+                Image(systemName: mode == .writing ? "checkmark" : "ellipsis")
                     .font(.title2)
-                    .foregroundColor(.gray)
+                    .foregroundColor(mode == .writing
+                                     ? (entryText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? .gray : .black)
+                                     : .gray)
                     .padding(.top, 5)
                     .padding(.horizontal, 12)
             }
@@ -281,7 +282,7 @@ struct JournalEntryView: View {
                         }) {
                             Image("Cancel")
                                 .resizable()
-                                .frame(width: 24, height: 24)
+                                .frame(width: 26, height: 26)
                         }
                         .padding(4)
                     }

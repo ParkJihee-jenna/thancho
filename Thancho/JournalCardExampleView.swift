@@ -49,8 +49,10 @@ struct JournalCardExampleView: View {
                     HStack {
                         Button(action: { dismiss() }) {
                             Image(systemName: "chevron.left")
-                                .font(.system(size: 20))
-                                .foregroundColor(.gray)
+                                .font(.title2) // 아이콘 크기
+                                .foregroundColor(.black)
+    
+                            
                         }
                         Spacer()
                         Button(action: { withAnimation { isDatePickerVisible.toggle() } }) {
@@ -139,7 +141,7 @@ struct JournalCardExampleView: View {
                 TabView(selection: $selectedImageIndex) {
                     ForEach(selectedJournalImages.indices, id: \.self) { index in
                         ZStack(alignment: .topTrailing) {
-                            Color.black.ignoresSafeArea()
+                            Color.white.ignoresSafeArea()
                             Image(uiImage: selectedJournalImages[index])
                                 .resizable()
                                 .scaledToFit()
